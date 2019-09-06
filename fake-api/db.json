@@ -121,6 +121,7 @@
       "nama": "Kaos Polos Hitam",
       "harga": 20000,
       "category": "polos",
+      "wishlist": false,
       "discount": 15,
       "deskripsi": "Kaos Terbaik",
       "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg"
@@ -130,6 +131,7 @@
       "nama": "The Gelap Kesatria",
       "harga": 40000,
       "category": "sablon",
+      "wishlist": false,
       "discount": 0,
       "deskripsi": "Kaos Terbaik",
       "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg"
@@ -139,6 +141,7 @@
       "harga": 30000,
       "discount": 20,
       "category": "sablon",
+      "wishlist": false,
       "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
       "deskripsi": "Kaos Terbaik",
       "id": 3
@@ -149,8 +152,19 @@
       "category": "Kopi",
       "discount": 0,
       "deskripsi": "oke bro",
+      "wishlist": false,
       "img": "https://doktersehat.com/wp-content/uploads/2018/11/kopi-doktersehat.jpg",
       "id": 4
+    },
+    {
+      "nama": "baju adat",
+      "harga": "50000",
+      "category": "batik",
+      "discount": "5",
+      "wishlist": false,
+      "deskripsi": "baju adat",
+      "img": "https://assets.rkb.id/produk/produk30504-1514178474.jpg",
+      "id": 5
     }
   ],
   "cart": [
@@ -213,6 +227,16 @@
       "discount": 0,
       "productName": "Something In Coffee",
       "id": 17
+    },
+    {
+      "productId": 5,
+      "userId": 1,
+      "quantity": 1,
+      "price": 50000,
+      "img": "https://assets.rkb.id/produk/produk30504-1514178474.jpg",
+      "discount": "5",
+      "productName": "baju adat",
+      "id": 21
     }
   ],
   "history": [

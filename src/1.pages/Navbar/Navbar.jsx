@@ -56,6 +56,16 @@ class NavbarComp extends Component {
                   <NavItem>
                     <NavLink>{this.props.userObj.role}</NavLink>
                   </NavItem>
+                  {this.props.userObj.role == "user" ? (
+                    <Link
+                      to="/cart"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <DropdownItem className="coba-coba">
+                        Cart <sup>{this.props.cart}</sup>
+                      </DropdownItem>
+                    </Link>
+                  ) : null}
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       Options
@@ -75,6 +85,7 @@ class NavbarComp extends Component {
                         </>
                       ) : (
                         <>
+                          {" "}
                           <Link
                             to="/cart"
                             style={{ textDecoration: "none", color: "inherit" }}
@@ -85,6 +96,9 @@ class NavbarComp extends Component {
                           </Link>
                           <Link to="/history">
                             <DropdownItem>History</DropdownItem>
+                          </Link>
+                          <Link to="/whistlist">
+                            <DropdownItem>Wishlist</DropdownItem>
                           </Link>
                           <DropdownItem divider />
                           <DropdownItem onClick={this.onBtnLogout}>

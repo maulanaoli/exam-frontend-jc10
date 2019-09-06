@@ -5,22 +5,43 @@ import { connect } from "react-redux";
 import "./History.css";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import { HistoCart } from "../../redux/1.actions";
+import { Alert } from "reactstrap";
 
 class History extends Component {
   state = {
     data: null
   };
 
+  componentDidUpdate() {
+    this.props.HistoCart(this.props.id);
+  }
   componentDidMount() {
     Axios.get(urlApi + "history?userId=" + this.props.id)
       .then(res => {
         this.setState({ data: res.data });
+        this.props.HistoCart(this.props.id);
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
       });
   }
+
+  historyKosong = () => {
+    if (this.props.histo == 0) {
+      return (
+        <Alert color="danger" className="text-center">
+          Cart anda kosong <Link to="/">Pergi berbelanja</Link>
+        </Alert>
+      );
+    }
+  };
+  checkLogin = () => {
+    if (this.props.username == "" || this.props.role == "") {
+      return <Redirect to="/" />;
+    }
+  };
   renderHistory = () => {
     var jsx = this.state.data.map(val => {
       return (
@@ -32,6 +53,14 @@ class History extends Component {
               <th>totalPrice</th>
               <th>Penerima</th>
               <th>Alamat</th>
+              <th>Detail</th>
+            </tr>
+            <tr>
+              <td>{val.id}</td>
+              <td>{val.time}</td>
+              <td>{val.TotalPrice}</td>
+              <td>{val.recipient}</td>
+              <td>{val.address}</td>
               <Link
                 to={{
                   pathname: "/history-detail/" + val.id,
@@ -42,14 +71,6 @@ class History extends Component {
               >
                 <th>click untuk detail</th>
               </Link>
-            </tr>
-            <tr>
-              <td>{val.id}</td>
-              <td>{val.time}</td>
-              <td>{val.TotalPrice}</td>
-              <td>{val.recipient}</td>
-              <td>{val.address}</td>
-              <td></td>
             </tr>
           </table>
         </div>
@@ -67,6 +88,8 @@ class History extends Component {
 
     return (
       <div>
+        {this.checkLogin()}
+        {this.historyKosong()}
         <table>{this.renderHistory()}</table>
       </div>
     );
@@ -75,7 +98,13 @@ class History extends Component {
 
 const mapStateToProps = state => {
   return {
-    id: state.user.id
+    username: state.user.username,
+    role: state.user.role,
+    id: state.user.id,
+    histo: state.history.histoLength
   };
 };
-export default connect(mapStateToProps)(History);
+export default connect(
+  mapStateToProps,
+  { HistoCart }
+)(History);

@@ -5,6 +5,7 @@ import { urlApi } from "../../3.helpers/database";
 import swal from "sweetalert";
 import { KartingEuy } from "../../redux/1.actions";
 import { Link, Redirect } from "react-router-dom";
+import { Alert } from "reactstrap";
 
 class Cart extends Component {
   state = {
@@ -184,13 +185,24 @@ class Cart extends Component {
   };
 
   funCharKosong = () => {
-    alert("chart anda kosong");
-    return <Redirect to="/" />;
+    if (this.props.cart == 0) {
+      return (
+        <Alert color="danger" className="text-center">
+          Cart anda kosong <Link to="/">Pergi berbelanja</Link>
+        </Alert>
+      );
+    }
   };
-
+  checkLogin = () => {
+    if (this.props.username == "" || this.props.role == "") {
+      return <Redirect to="/" />;
+    }
+  };
   render() {
     return (
       <div className="container">
+        {this.checkLogin()}
+        {this.funCharKosong()}
         <table className="table mt-3 text-center">
           <thead>
             <tr>
@@ -220,9 +232,7 @@ class Cart extends Component {
               <div className="col-8">
                 <h3>Total Harga = {this.TotalPrice()}</h3>
               </div>
-            ) : (
-              this.funCharKosong()
-            )}
+            ) : null}
           </div>
           {this.state.isCheckout ? (
             <div className="row mt-4">
@@ -293,7 +303,9 @@ class Cart extends Component {
 const mapStateToProps = state => {
   return {
     id: state.user.id,
-    username: state.user.username
+    username: state.user.username,
+    role: state.user.role,
+    cart: state.cart.cartLength
   };
 };
 
